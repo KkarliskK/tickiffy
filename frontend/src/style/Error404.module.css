@@ -1,0 +1,22 @@
+.errorContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40rem;
+    height: 22rem;
+    padding: 1rem;
+    opacity: .6;
+    border-radius: .25rem;
+
+    background-color: var(--primary-color);
+
+    .errorHeader{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 5rem;
+        width: 100%;
+        padding: 1rem;
+    }
+}

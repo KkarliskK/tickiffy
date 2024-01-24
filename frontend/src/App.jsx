@@ -8,20 +8,17 @@ import Home from './components/Home';
 import './style/App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
 	return (
 		<BrowserRouter>
 			{/*<Header hamburger={toggleSidebar} />*/}
-			<main>
-				<Routes>
-					<Route path='/forgotpassword' element={<ForgotPass />} />
-					<Route path='/register' element={<Register />} />
-					<Route path='/login' element={<Login />} />
-					<Route path='*' element={<Error404 />} />
-					<Route path='/' element={<Home />} />
-				</Routes>
-			</main>
+			<Routes>
+				<Route path='/forgotpassword' element={<ForgotPass />} />
+				<Route path='/register' element={<Register />} />
+				<Route path='/login' element={<Login />} />
+				<Route path='*' element={<Error404 />} />
+				<Route path='/' element={<Home />} />
+			</Routes>
 		</BrowserRouter>
 	);
 }

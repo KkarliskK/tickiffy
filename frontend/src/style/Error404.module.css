@@ -1,4 +1,6 @@
 .errorContainer{
+    position: absolute;
+    top: 15rem;
     display: flex;
     flex-direction: column;
     justify-content: center;

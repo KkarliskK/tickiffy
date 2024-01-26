@@ -1,0 +1,60 @@
+.eventsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40vh;
+    margin-top: 5rem;
+
+    .eventFestival,
+    .eventSport,
+    .eventConcert
+    {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        width: 100%;
+        height: 35vh;
+        background-color: var(--secondary-color);
+        box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.5);
+        transition: all ease-in-out .25s;
+        cursor: pointer;
+    }
+
+    .eventFestival:hover,
+    .eventSport:hover,
+    .eventConcert:hover{
+        box-shadow: 0px 0px 20px 3px rgba(0,0,0,0.6);
+    }
+
+}
+
+.eventSport{
+    background-image: url('../assets/sport.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.eventConcert{
+    background-image: url('../assets/concert.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.eventFestival{
+    background-image: url('../assets/festival.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.eventLink{
+    text-decoration: none;
+    background: none;
+    position: relative;
+    width: 25%;
+    margin: 2rem;
+    padding: 0.5rem;
+    color: white;
+
+}

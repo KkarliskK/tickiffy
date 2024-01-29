@@ -8,12 +8,10 @@ import Home from './components/Home';
 import './style/App.css'
 
 function App() {
-  const location = useLocation();
-  const hideOnRoutes = ['/login', '/register', '/forgotpassword'];
 
   return (
     <BrowserRouter>
-      {!hideOnRoutes.includes(location.pathname) && <Header />}
+      <Header />
       <Routes>
         <Route path='/forgotpassword' element={<ForgotPass />} />
         <Route path='/register' element={<Register />} />
@@ -23,6 +21,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

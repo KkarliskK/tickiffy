@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    function create(Request $request, User $user)
+    function create(Request $request, User $user)      //this is for registration
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'username' => 'required|string',
-            'email' => 'required|string',
+            'email' => 'required|string',                   //validator just validates the recieved data | backend validation system
             'password' => 'required|string',
         ]);
         if ($validator->fails()){
@@ -29,10 +29,10 @@ class AuthController extends Controller
         $request = (object) $validator->validated();
 
 
-        $found = User::where('name', $request->name)->first();
+        $found = User::where('username', $request->name)->first();
             if ($found) {
-            return response()->json([
-                'error' => 'User already in database.'
+            return response()->json([                                   // checking if the username already exists in database
+                'error' => 'Username already in use.'
             ], 404);
         }
 
@@ -46,19 +46,26 @@ class AuthController extends Controller
 
 
         $user->name = $request->name;
-        $user->username = $request->username;
+        $user->username = $request->username;                   //seting the data for each variable and hashing password before put in database
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 
 
         if ($user->save()){
-            $token = $user->createToken('Personal Access Token');
+            $token = $user->createToken('Personal Access Token');           // here the data has ben sent to database
             return ['token' => $token->plainTextToken];
         }
         else{
-            return response()->json(['error' => 'Fill all fields!']);
+            return response()->json(['error' => 'Fill all fields!']);          // if some fields are left empty the backend sends this message
         }
     }
+
+    
+    function login(Request $request, User $user)      //this is for login
+    {
+        
+    }
+    
 }
 
 ?>

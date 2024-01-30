@@ -74,7 +74,7 @@ const Login = () => {
 				onChange={e => setPassword(e.target.value)}
             />
             {passwordError && <p className={css.error}>Password can't be empty.</p>}
-            {errorMsg && <p className={css.error}>Password can't be empty.</p>}
+            {errorMsg && <p className={css.error}>Invalid username or password.</p>}
             <button>Sign In</button>
             </form>
 

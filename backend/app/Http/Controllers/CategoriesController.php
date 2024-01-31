@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoriesController extends Controller
 {
-    function select($id)
+    function select()
     {
         $categories = Categories::all();
 
@@ -30,16 +30,16 @@ class CategoriesController extends Controller
                 'error' => $validator->errors()->toArray()
             ], 422);
         }
+        $fullToken = $request->bearerToken();
         $request = (object) $validator->validated();
 
-        $fullToken = $request->bearerToken();
         $tokenId = explode("|", $fullToken);
         $token = PersonalAccessToken::where('id', $tokenId[0])->select('tokenable_id')->first();
         if(!$token){
             return response()->json(['error' => 'not logged in']);
         }
 
-        $categories= Categories::new();
+        $categories = new Categories;
         $categories->category = $request->category;
 
         if($categories->save()){

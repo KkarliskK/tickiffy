@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import css from '../style/Admin.module.css';
+import Cookies from "js-cookie";
 
 
 const AdminPanel = () => {
@@ -14,7 +15,7 @@ const AdminPanel = () => {
     const [ticket_price, setTicket_Price] = useState('');
     const [categoryArray, setcategoryArray] = useState([]);
 
-    const categoryoptions = categoryArray.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)
+    const categoryoptions = categoryArray.map((category) => <option key={category.id} value={category.id}>{category.category}</option>)
 
     // console.log(`Current active section: ${activeSection}`);
 
@@ -44,6 +45,9 @@ const AdminPanel = () => {
                     date:date,
                     ticket_price:ticket_price,
                 },
+                {
+                    headers: { Authorization: `Bearer ${Cookies.get('token')}` }
+                }
             )
             .then(function (response){
                 //when success
@@ -63,6 +67,9 @@ const AdminPanel = () => {
                 {
                     category:insertCategory,
                 },
+                {
+                    headers: { Authorization: `Bearer ${Cookies.get('token')}` }
+                }
             )
             .then(function (response){
                 //when success

@@ -1,0 +1,220 @@
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .adminPanel{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 50vh;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+        border-radius: 6px;
+
+
+        .sidebar{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            height: 100%;
+            border-right: 1px solid black;
+            background-color: rgb(238, 238, 238);
+            padding: 12px;
+            border-radius: 4px 0px 0px 4px;
+
+            .sidebarButton{
+                border: none;
+                cursor: pointer;
+                padding: 12px;
+                width: 100%;
+                margin: 10px;
+                height: 5vh;
+                border-radius: 4px;
+                color: white;
+                background: rgba(72, 72, 72, 0.85);
+                transition: all ease-in-out 0.2s;
+                box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .sidebarButton:hover{
+                background: rgba(52, 52, 52, 0.95);
+                box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.85);
+            }
+
+        }
+
+        .adminAddCategory{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 70%;
+            height: 100%;
+
+            .categoryForm{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 50%;
+
+                .labelContainer{
+                    display: flex;
+                    width: 50%;
+
+                    .label{
+                        color: black;
+                        font-size: 16px;
+                    }
+                }
+
+                .input{
+                    padding: 10px;
+                    margin: 10px;
+                    width: 50%;    /*change this later*/
+                    border: none;
+                    background-color: rgb(228, 228, 228);
+                    box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.45);
+                    border-radius: 4px;
+                }
+
+                .addCategoryButton{
+                    border: none;
+                    cursor: pointer;
+                    padding: 6px;
+                    width: 40%;
+                    margin-top: 30px;
+                    height: 4vh;
+                    border-radius: 4px;
+                    color: white;
+                    background: rgba(0, 0, 139, 0.85);
+                    transition: all ease-in-out 0.25s;
+                    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+                    font-size: 16px;
+                }
+                .addCategoryButton:hover{
+                    background: rgba(0, 0, 126, 0.95);
+                    box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.85);
+                }
+            }
+        }
+
+        .adminAddEvent{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 70%;
+            height: 100%;
+
+            .eventForm{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+
+                .input{
+                    padding: 10px;
+                    margin: 10px;
+                    width: 80%;    /*change this later*/
+                    border: none;
+                    background-color: rgb(228, 228, 228);
+                    box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.45);
+                    border-radius: 4px;
+                }
+
+                .select{
+                    padding: 10px;
+                    margin: 10px;
+                    width: 80%;    /*change this later*/
+                    border: none;
+                    background-color: rgb(228, 228, 228);
+                    box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.45);
+                    border-radius: 4px;
+                }
+
+                .addEventButton{
+                    border: none;
+                    cursor: pointer;
+                    padding: 6px;
+                    width: 40%;
+                    margin: 10px;
+                    height: 4vh;
+                    border-radius: 4px;
+                    color: white;
+                    background: rgba(0, 0, 139, 0.85);
+                    transition: all ease-in-out 0.25s;
+                    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+                    font-size: 18px;
+                }
+                .addEventButton:hover{
+                    background: rgba(0, 0, 126, 0.95);
+                    box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.85);
+                }
+            }
+        }
+
+        .adminDeleteEvent{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 70%;
+            height: 100%;
+
+            .listContainer{
+                display: flex;
+                color: black;
+                width: 80%;
+                background-color: rgb(228, 228, 228);
+                box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.45);
+                margin: 5px;
+                padding: 6px;
+                border-radius: 4px;
+            }
+            .select{
+                padding: 10px;
+                margin: 10px;
+                width: 80%;    /*change this later*/
+                border: none;
+                background-color: rgb(228, 228, 228);
+                box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.45);
+                border-radius: 4px;
+            }
+
+            .deleteButton{
+                border: none;
+                cursor: pointer;
+                padding: 4px;
+                width: 20%;
+                height: 3vh;
+                border-radius: 4px;
+                color: white;
+                background: rgb(220, 32, 32);
+                transition: all ease-in-out 0.25s;
+                box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+            }
+            .deleteButton:hover{
+                background: rgb(197, 15, 15);
+                box-shadow: 0px 0px 6px 1px rgba(0,0,0,0.85);
+            }
+
+
+        }
+    }
+}
+
+.h2{
+    color: black;
+    margin: 10px;
+}

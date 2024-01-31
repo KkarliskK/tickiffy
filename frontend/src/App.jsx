@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import './style/App.css'
 import Logout from "./components/Logout.jsx";
+import AdminPanel from "./components/AdminPanel.jsx";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/logout' element={<Logout />} />
+          <Route path='/adminpanel' element={<AdminPanel />} />
           <Route path='/forgotpassword' element={<ForgotPass />} />,
           <Route path='/register' element={<Register />} />,
           <Route path='/login' element={<Login />} />,

@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('event');
             $table->string('description');
+            $table->string('category');
+            $table->timestamp('date');
+            $table->decimal('ticket_price', 8, 2);
             $table->timestamps();
         });
     }

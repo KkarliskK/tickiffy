@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\SUpport\Facades\DB;
 
 return new class extends Migration
 {
@@ -16,6 +17,13 @@ return new class extends Migration
             $table->string('category');
             $table->timestamps();
         });
+
+        DB::table('event_category')->insert([
+            ['category' => 'Sport events'],
+            ['category' => 'Festivals'],
+            ['category' => 'Concerts'],
+            // Add more categories as needed
+        ]);
     }
 
     /**

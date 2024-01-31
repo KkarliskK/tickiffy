@@ -21,7 +21,7 @@ const Header = () => {
             </Link>
             {isLoggedIn ? (
                 <Link to='/logout' className={css.link}>
-                    <h3>Sign Out</h3>
+                    <h3 className={css.logoutH3}>Sign Out</h3>
                 </Link>
             ) : (
                 <Link to='/login' className={css.link}>

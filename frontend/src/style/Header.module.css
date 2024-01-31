@@ -24,12 +24,16 @@
     height: 100%;
 
     h2{
-        font-size: 32px;
+        font-size: 24px;
         margin: 0;
     }
 
     h3{
-        font-size: 28px;
+        font-size: 22px;
         margin: 0;
+    }
+
+    .logoutH3{
+        color: black;
     }
 }

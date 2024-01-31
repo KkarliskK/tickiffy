@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import css from '../style/Login.module.css';
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from 'axios';
 
@@ -58,26 +58,45 @@ const Login = () => {
 
     return(
         <>
-            <h1>Tickiffy Login</h1>
-            <form onSubmit={register}>
-            <input 
-                type='text'
-                placeholder='username'
-                value={username}
-				onChange={e => setUsername(e.target.value)}
-            />
-            {usernameError && <p className={css.error}>Username can't be empty.</p>}
-            <input 
-                type='password'
-                placeholder='password'
-                value={password}
-				onChange={e => setPassword(e.target.value)}
-            />
-            {passwordError && <p className={css.error}>Password can't be empty.</p>}
-            {errorMsg && <p className={css.error}>Invalid username or password.</p>}
-            <button>Sign In</button>
-            </form>
-
+            <div className={css.mainContainer}>
+                <div className={css.loginContainer}>
+                    <form className={css.loginForm} onSubmit={register}>
+                        <h2 className={css.h2}>Sign In into Tickiffy</h2>
+                        <div className={css.formSplit}>
+                            <label className={css.label}>Username:</label>
+                        </div>
+                            <input
+                                className={css.input}
+                                type='text'
+                                placeholder='e.g. JohnDoe123'
+                                value={username}
+                                onChange={e => setUsername(e.target.value)}
+                            />
+                            {usernameError && <p className={css.error}>Username can't be empty.</p>}
+                        <div className={css.formSplit}>
+                            <label className={css.label}>Password:</label>
+                        </div>
+                            <input
+                                className={css.input}
+                                type='password'
+                                placeholder='Must have at least 6 characters'
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                            />
+                            {passwordError && <p className={css.error}>Password can't be empty.</p>}
+                            {errorMsg && <p className={css.error}>Invalid username or password.</p>}
+                        <div className={css.loginFooter}>
+                            <button className={css.loginButton}>Sign In</button>
+                            <p className={css.p}>Forgot your password?
+                                <Link className={css.link} to='/forgotpass'> Ask for new!</Link>
+                            </p>
+                            <p className={css.p}>Don't have an account?
+                                <Link className={css.link} to='/register'> Sign Up here!</Link>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </>
     );
 };

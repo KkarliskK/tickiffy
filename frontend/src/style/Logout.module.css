@@ -1,0 +1,45 @@
+.cancelContainer{
+    position: absolute;
+    top: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.cancelButton{
+    margin: 8px;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    width: 40%;
+    border-radius: 4px;
+    color: white;
+    background: rgba(213, 8, 8, 0.85);
+    transition: all ease-in-out 0.25s;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+}
+
+.signOutButton{
+    margin: 8px;
+    border: none;
+    cursor: pointer;
+    padding: 12px;
+    width: 40%;
+    border-radius: 4px;
+    color: white;
+    background: rgba(0, 0, 139, 0.85);
+    transition: all ease-in-out 0.25s;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+}
+
+.h2{
+    color: black;
+}

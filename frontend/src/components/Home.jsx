@@ -1,6 +1,8 @@
 import React from "react";
 import css from '../style/Home.module.css';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
+import axios from "axios";
+import Cookies from "js-cookie";
 
 const Home = () => {
     return(

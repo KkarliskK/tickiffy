@@ -17,12 +17,14 @@ class AuthController extends Controller
         $messages = [
             'username.unique' => 'The username has already been taken.',
             'email.unique' => 'The email has already been registered.',
+            'mobile.unique' => 'The phone number has already been registered.',
         ];
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
             'username' => 'required|string|unique:users,username',
             'email' => 'required|string|unique:users,email',
+            'mobile' => 'required|string|unique:users,mobile',
             'password' => 'required|string',
         ], $messages);
 
@@ -35,6 +37,7 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
         $user->email = $request->email;
+        $user->mobile = $request->mobile;
         $user->password = Hash::make($request->password);
 
         if ($user->save()){

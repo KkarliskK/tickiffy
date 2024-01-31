@@ -1,0 +1,98 @@
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 90vh;
+
+}
+
+.loginContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 45vh;
+    background-color: white;
+    box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.5);
+    border-radius: 4px;
+
+    .loginForm{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+
+        .formSplit{
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .input{
+            padding: 10px;
+            margin: 10px;
+            width: 80%;
+            border: none;
+            background-color: rgba(0, 0, 0, 0.10);
+            box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.45);
+            border-radius: 4px;
+
+        }
+
+        .link{
+            text-decoration: none;
+            font-size: 14px;
+            color: darkblue;
+        }
+
+        .p{
+            color: black;
+            font-size: 14px;
+        }
+
+        .label{
+            color: black;
+            font-size: 16px;
+            margin-left: 40px;
+        }
+
+        .loginButton{
+            border: none;
+            cursor: pointer;
+            padding: 12px;
+            width: 40%;
+            border-radius: 4px;
+            color: white;
+            background: rgba(0, 0, 139, 0.85);
+            transition: all ease-in-out 0.25s;
+            box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
+        }
+
+        .loginButton:hover{
+            background: rgba(0, 0, 140, 0.95);
+            box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.85);
+        }
+
+        .loginFooter{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin-top: 25px;
+        }
+    }
+}
+
+.h2{
+    color: black;
+}
+
+.error{
+    font-size: 14px;
+    margin: 0;
+    color: red;
+}

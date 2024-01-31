@@ -12,13 +12,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('event_category', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('category');
             $table->timestamps();
         });
 
-        DB::table('event_category')->insert([
+        DB::table('categories')->insert([
             ['category' => 'Sport events'],
             ['category' => 'Festivals'],
             ['category' => 'Concerts'],

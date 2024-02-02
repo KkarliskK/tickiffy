@@ -14,7 +14,6 @@ const Event = () => {
     const [quantityError, setQuantityError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
 
-
     const [quantity, setQuantity] = useState(0);
 
     const decreaseQuantity = () => {
@@ -83,6 +82,7 @@ const Event = () => {
                 });
         }
     };
+
 
     if (isLoading) {
         return <div><h3 className={css.h3}>Loading...</h3></div>;

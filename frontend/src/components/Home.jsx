@@ -7,20 +7,43 @@ import Cookies from "js-cookie";
 const Home = () => {
 
     const [randomEvents, setRandomEvents] = useState([]);
+    const [randomEventId, setRandomEventId] = useState([]);
+    const [ticketPrice, setTicketPrice] = useState([]);
 
     useEffect(() => {
         axios
-            .get(
-                'http://localhost:8000/api/home/random'
-            )
-            .then(function (response){            //this is for getting 5 random events from database
-                console.log(response.data);
-                setRandomEvents(response.data)
+            .get('http://localhost:8000/api/home/random')
+            .then(function (response){
+                console.log("Events fetched: ", response.data);
+                const events = response.data;
+                const promises = events.map(event =>
+                    axios.get(`http://localhost:8000/api/event/ticket/${event.id}`)
+                        .then(response => {
+                            console.log(`Ticket price for event id ${event.id}: `, response.data[0].ticket_price);
+                            event.ticket_price = response.data[0].ticket_price;
+                            return event;
+                        })
+                        .catch(error => {
+                            console.error(`Error fetching ticket for event id ${event.id}: `, error);
+                            event.ticket_price = 'Error';
+                            return event;
+                        })
+                );
+                Promise.all(promises)
+                    .then(updatedEvents => {
+                        console.log("Updated events with ticket prices: ", updatedEvents);
+                        setRandomEvents(updatedEvents);
+                    });
             })
             .catch(function (error){
-                console.error(error);
+                console.error("Error fetching events: ", error);
             });
     }, []);
+
+
+
+
+
 
 
 
@@ -54,13 +77,17 @@ const Home = () => {
                             />
                             <h3 className={css.singleEventTitle}>{event.event}</h3>
                             <div className={css.info}>
-                                <p className={css.price}>Ticket: {event.ticket_price} EUR</p>
+                                <p className={css.price}>Ticket
+                                    Price: {event.ticket_price ? event.ticket_price : 'Loading...'} EUR</p>
+
                                 <p className={css.date}>Date: {event.date}</p>
                             </div>
                         </div>
                     </Link>
                 ))}
+
             </div>
+
 
         </>
     );

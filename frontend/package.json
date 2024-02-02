@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.0.15",
+    "@stripe/react-stripe-js": "^2.4.0",
+    "@stripe/stripe-js": "^2.4.0",
     "axios": "^1.6.7",
     "browser-router": "^0.2.0",
     "js-cookie": "^3.0.5",

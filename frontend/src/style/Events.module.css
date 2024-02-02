@@ -1,0 +1,168 @@
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 100px;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 60%;
+    margin-top: 40px;
+    height: 100vh;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    background: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.infoBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.bottomContainer {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    height: 40vh;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.ticketContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 60%;
+    height:40vh;
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+}
+
+.listContainer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+}
+
+.ticketListContainer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    height: 10vh;
+    background: rgba(220, 220, 220, 0.8);
+}
+
+.ticketListContainerMain{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.icon{
+    color: black;
+    margin: 5px;
+}
+
+.quantityDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantityButton {
+    border: none;
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.quantityButton:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.quantityWindow {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+.checkoutButton {
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    margin: 3px;
+    width: 70%;
+    height: 4vh;
+    border-radius: 4px;
+    color: white;
+    background: rgb(21, 161, 8);
+    transition: all ease-in-out 0.25s;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+    margin-top: 30px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+}
+
+.checkoutButton:hover {
+    background: rgb(15, 128, 5);
+    box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.85);
+}
+
+
+
+.h2 {
+    color: black;
+}
+
+.p {
+    color: black;
+    margin: 0;
+}
+
+.successMessage{
+    font-size: 14px;
+    margin: 0;
+    color: green;
+}
+.errorMessage{
+    font-size: 14px;
+    margin: 0;
+    color: #dc2020;
+}

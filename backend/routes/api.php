@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,13 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/status', [AuthController::class, 'status']);
 Route::get('/categories', [CategoriesController::class, 'select']);
 Route::post('/categories/create', [CategoriesController::class, 'create']);
-Route::get('/event', [EventController::class, 'select']);
 Route::post('/event/create', [EventController::class, 'create']);
+Route::get('/event/showbycat/{id}', [EventController::class, 'showByCategory']);
+Route::delete('/event/delete/{id}', [EventController::class, 'delete']);
+Route::get('/event/update/{id}', [EventController::class, 'getUpdate']);
+Route::get('/home/random', [EventController::class, 'getRandom']);
+Route::get('/event/single/{id}', [EventController::class, 'select']);
+Route::post('/event/{eventId}/ticket/create', [TicketsController::class, 'create']);
+Route::get('/event/ticket/{id}', [TicketsController::class, 'select']);
+Route::put('/event/{eventId}/ticket/{id}', [TicketsController::class, 'change']);
 

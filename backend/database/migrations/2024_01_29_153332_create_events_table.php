@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Categories;
 
 return new class extends Migration
 {
@@ -15,9 +16,11 @@ return new class extends Migration
             $table->id();
             $table->string('event');
             $table->string('description');
-            $table->string('category');
-            $table->timestamp('date');
-            $table->decimal('ticket_price', 8, 2);
+            $table->foreignIdFor(Categories::class)->constrained()->cascadeOnDelete();
+            $table->date('date');
+            $table->time('time');
+            $table->string('location');
+            $table->string('img_url');
             $table->timestamps();
         });
     }

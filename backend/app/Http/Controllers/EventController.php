@@ -9,17 +9,14 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class EventController extends Controller
 {
-    public function select(Request $request, Event $event, $id)
+    public function select(Request $request, Event $event, $id)     //select single event by its id
     {
         $eventId = Event::find($id);
 
-        return response()->json([
-            'success' => 'Data retrieved successfully',
-            'data' => $eventId,
-        ]);
+        return response()->json($eventId);
     }
 
-    public function create(Request $request, Event $event)
+    public function create(Request $request, Event $event)       //create event
     {
         $fullToken = $request->bearerToken();
         $tokenId = explode("|", $fullToken);
@@ -32,9 +29,11 @@ class EventController extends Controller
         $validator = Validator::make($request->all(), [
             'event' => 'required|string',
             'description' => 'required|string',
-            'category' => 'required|string',
+            'category' => 'required|integer',
             'date' => 'required|date',
-            'ticket_price' => 'required|numeric',
+            'time' => 'required',
+            'location' => 'required|string',
+            'img_url' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -45,14 +44,73 @@ class EventController extends Controller
 
         $event->event = $request->event;
         $event->description = $request->description;
-        $event->category = $request->category;
+        $event->categories_id = $request->category;
         $event->date = $request->date;
-        $event->ticket_price = $request->ticket_price;
+        $event->time = $request->time;
+        $event->location = $request->location;
+        $event->img_url = $request->img_url;
 
         if ($event->save()) {
-            return response()->json(['success' => 'Event created successfully!']);
+            return response()->json([
+                'success' => 'Event created successfully!',
+                'event_id' => $event->id
+            ]);
         } else {
             return response()->json(['error' => 'Fill all fields!']);
         }
+
     }
+
+    public function show(Request $request, Event $event)       //get all events
+    {
+        $events = Event::all();
+
+        return response()->json([
+            'success' => 'Data retrieved successfully',
+            'data' => $events,
+        ]);
+    }
+
+    public function showByCategory(Request $request, $categoryId)      //get event by its category
+    {
+        $events = Event::where('categories_id', $categoryId)->get();
+
+        return response()->json([
+            'success' => 'Data retrieved successfully',
+            'data' => $events,
+        ]);
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $event = Event::find($id);
+
+        if ($event) {
+            $event->delete();
+            return response()->json([
+                'success' => 'Event deleted successfully'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => 'Event not found'
+            ], 404);
+        }
+    }
+
+    public function getUpdate(Request $request, Event $event, $id)     //select single event by its id
+    {
+        $eventId = Event::find($id);
+
+        return response()->json([
+            'success' => 'Data retrieved successfully',
+            'data' => $eventId,
+        ]);
+    }
+
+    public function getRandom(Request $request, Event $event)
+    {
+        $events = Event::inRandomOrder()->limit(5)->get();
+        return response()->json($events);
+    }
+
 }

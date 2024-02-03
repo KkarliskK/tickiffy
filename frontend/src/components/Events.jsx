@@ -14,15 +14,28 @@ const Event = () => {
     const [quantityError, setQuantityError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
 
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState([]);
 
-    const decreaseQuantity = () => {
-        if (quantity > 0) {
-            setQuantity(quantity - 1);
-        }
+    const decreaseQuantity = (index) => {
+        setQuantity(prevQuantity => {
+            const newQuantity = [...prevQuantity];
+            if (newQuantity[index] > 0) {
+                newQuantity[index]--;
+            }
+            return newQuantity;
+        });
     };
-    const increaseQuantity = () => {
-        setQuantity(quantity + 1);
+
+    const increaseQuantity = (index) => {
+        setQuantity(prevQuantity => {
+            const newQuantity = [...prevQuantity];
+            if (!isNaN(newQuantity[index])) {
+                newQuantity[index]++;
+            } else {
+                newQuantity[index] = 1;
+            }
+            return newQuantity;
+        });
     };
 
     useEffect(() => {
@@ -42,7 +55,8 @@ const Event = () => {
             .get(`http://localhost:8000/api/event/ticket/${id}`)
             .then(function (response){
                 console.log(response.data);
-                setTicketData(response.data);
+                setTicketData(Array.isArray(response.data) ? response.data : [response.data]);
+                setQuantity(new Array(response.data.length).fill(0)); // Initialize quantity with zeros
                 setIsLoading(false); // Set loading to false after data is loaded
             })
             .catch(function (error){
@@ -51,36 +65,42 @@ const Event = () => {
     }, [id]);
 
 
+
     const handleCheckout = () => {
-        // Calculate the new quantity
-        const newQuantity = ticketData[0].quantity - quantity;
-        if(quantity == 0){
-            setQuantityError('You can not buy 0 tickets!');
-            setSuccessMessage('');
-        }else {
-            setQuantityError('');
-            // Send a PUT or PATCH request to update the quantity
-            axios.put(`http://localhost:8000/api/event/${ticketData[0].event_id}/ticket/${ticketData[0].id}`, {
-                quantity: newQuantity,
-            }, {
-                headers: {Authorization: `Bearer ${Cookies.get('token')}`}
-            })
-                .then(response => {
-                    console.log('Ticket quantity updated successfully');
-                    setSuccessMessage('Payment Successful!');
-                    // Update the ticketData state with the new quantity
-                    setTicketData(prevState => ({
-                        ...prevState,
-                        [0]: {
-                            ...prevState[0],
-                            quantity: newQuantity,
-                        },
-                    }));
+        ticketData.forEach((ticket, index) => {
+            // Calculate the new quantity
+            const newQuantity = ticket.quantity - quantity[index];
+            if(quantity[index] == 0){
+                setQuantityError('You can not buy 0 tickets!');
+                setSuccessMessage('');
+            }else {
+                setQuantityError('');
+                // Send a PUT or PATCH request to update the quantity
+                axios.put(`http://localhost:8000/api/event/${ticket.event_id}/ticket/${ticket.id}`, {
+                    quantity: newQuantity,
+                }, {
+                    headers: {Authorization: `Bearer ${Cookies.get('token')}`}
                 })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
+                    .then(response => {
+                        console.log('Ticket quantity updated successfully');
+                        setSuccessMessage('Payment Successful!');
+                        // Update the ticketData state with the new quantity
+                        setTicketData(prevState => prevState.map((ticket, i) => {
+                            if (i === index) {
+                                return {
+                                    ...ticket,
+                                    quantity: newQuantity,
+                                };
+                            } else {
+                                return ticket;
+                            }
+                        }));
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
     };
 
 
@@ -125,19 +145,24 @@ const Event = () => {
                             <div className={css.ticketListContainerMain}>
                                 <p className={css.p}>Ticket:</p>
                                 <p className={css.p}>Price:</p>
-                                <p className={css.p}>Available: {ticketData[0].quantity}</p>
+                                <p className={css.p}>Available: </p>
+                                <p className={css.p}>Select: </p>
                             </div>
-                            <div className={css.ticketListContainer}>
-                                <p className={css.p}>{ticketData[0].ticket}</p>
-                                <p className={css.p}>{ticketData[0].ticket_price} EUR</p>
-                                <div className={css.quantityDiv}>
-                                    <button className={css.quantityButton} onClick={decreaseQuantity}
-                                            disabled={quantity === 0}>-
-                                    </button>
-                                    <input className={css.quantityWindow} type="text" value={quantity} readOnly/>
-                                    <button className={css.quantityButton} onClick={increaseQuantity}>+</button>
+                            {ticketData.map((ticket, index) => (
+                                <div key={index} className={css.ticketListContainer}>
+                                    <p className={css.p}>Ticket: {ticket.ticket}</p>
+                                    <p className={css.p}>Price: {ticket.ticket_price} EUR</p>
+                                    <p className={css.p}>Available: {ticket.quantity}</p>
+                                    <div className={css.quantityDiv}>
+                                        <button className={css.quantityButton} onClick={() => decreaseQuantity(index)}
+                                                disabled={quantity[index] === 0}>-
+                                        </button>
+                                        <input className={css.quantityWindow} type="text" value={quantity[index]} readOnly/>
+                                        <button className={css.quantityButton} onClick={() => increaseQuantity(index)}>+</button>
+                                    </div>
                                 </div>
-                            </div>
+                            ))}
+
                             <button className={css.checkoutButton} onClick={handleCheckout}>Go to Checkout</button>
                             {successMessage && <p className={css.successMessage}>{successMessage}</p>}
                             {quantityError && <p className={css.errorMessage}>{quantityError}</p>}

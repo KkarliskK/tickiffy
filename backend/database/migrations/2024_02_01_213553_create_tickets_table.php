@@ -52,7 +52,44 @@ return new class extends Migration
                 'ticket' => 'Standart ticket.',
                 'ticket_price' => '29.99',
                 'quantity' => '250',
+            ],
+            [
+                'event_id' => '6',
+                'ticket' => 'Standart ticket.',
+                'ticket_price' => '29.99',
+                'quantity' => '250',
+            ],
+            [
+                'event_id' => '6',
+                'ticket' => 'VIP ticket.',
+                'ticket_price' => '59.99',
+                'quantity' => '50',
+            ],
+            [
+                'event_id' => '7',
+                'ticket' => 'Standart ticket.',
+                'ticket_price' => '29.99',
+                'quantity' => '250',
+            ],
+            [
+                'event_id' => '8',
+                'ticket' => 'Standart ticket.',
+                'ticket_price' => '19.99',
+                'quantity' => '250',
+            ],
+            [
+                'event_id' => '9',
+                'ticket' => 'Standart ticket.',
+                'ticket_price' => '49.99',
+                'quantity' => '250',
+            ],
+            [
+                'event_id' => '10',
+                'ticket' => 'Standart ticket.',
+                'ticket_price' => '69.99',
+                'quantity' => '250',
             ]
+
         ]);
     }
 

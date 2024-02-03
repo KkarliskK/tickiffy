@@ -70,7 +70,53 @@ return new class extends Migration
                 'time' => '10:00:00',
                 'location' => 'Riga, Latvia',
                 'img_url' => 'https://sveba-dahlen.ee/wp-content/uploads/2023/08/Riga_Food_2023-1024x576-2.jpg'
+            ],
+            [
+                'event' => 'Dinamo Riga hockey game',
+                'description' => 'KHL Dinamo Riga vs Some random team will play for the final win.',
+                'categories_id' => '4',
+                'date' => '2024-11-18',
+                'time' => '20:00:00',
+                'location' => 'Riga, Arena Riga',
+                'img_url' => 'https://i.tiesraides.lv/1200x0s/pictures/2011-01-14/2011-01-14_ozolins_dinamo_koksarovs.jpg'
+            ],
+            [
+                'event' => 'Riga Jazz Stage',
+                'description' => 'An international jazz artists contest and concert series.',
+                'categories_id' => '3',
+                'date' => '2024-04-02',
+                'time' => '19:00:00',
+                'location' => 'Riga, Latvia',
+                'img_url' => 'https://www.aula.lv/uploads/event-group/532/rjs-aula-1120x600.jpg'
+            ],
+            [
+                'event' => 'Latvian Beer Festival',
+                'description' => 'The largest beer festival in the Baltics celebrating various types of beers.',
+                'categories_id' => '2',
+                'date' => '2024-05-24',
+                'time' => '12:00:00',
+                'location' => 'Riga, Latvia',
+                'img_url' => 'https://latviabeerfest.lv/img/logo.png'
+            ],
+            [
+                'event' => 'Riga City Festival',
+                'description' => 'A city-wide celebration with various cultural, musical, and sports events.',
+                'categories_id' => '2',
+                'date' => '2024-08-16',
+                'time' => '10:00:00',
+                'location' => 'Riga, Latvia',
+                'img_url' => 'https://www.riga.lv/sites/riga/files/styles/node_image_large/public/gallery_images/hokeja-fani-sagaida-h-latvijas-hokejistus.jpg?itok=_zskCxwW'
+            ],
+            [
+                'event' => 'Latvian National Opera Season Opening',
+                'description' => 'The opening of the annual season of the Latvian National Opera and Ballet.',
+                'categories_id' => '3',
+                'date' => '2024-09-01',
+                'time' => '19:00:00',
+                'location' => 'Riga, Latvia',
+                'img_url' => 'https://image.arrivalguides.com/x/18/bd0c2b09820a0572937eddb16bf71a40.jpg'
             ]
+
         ]);
     }
 

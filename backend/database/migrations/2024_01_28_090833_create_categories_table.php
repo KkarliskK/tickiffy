@@ -22,6 +22,7 @@ return new class extends Migration
             ['category' => 'Sport events'],
             ['category' => 'Festivals'],
             ['category' => 'Concerts'],
+            ['category' => 'Latvian holidays'],
             // Add more categories as needed
         ]);
     }

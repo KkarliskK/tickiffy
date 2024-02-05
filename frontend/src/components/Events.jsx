@@ -43,7 +43,7 @@ const Event = () => {
             .get(`http://localhost:8000/api/event/single/${id}`)
             .then(response => {
                 setEventData(response.data);
-                console.log(response.data);
+                //console.log(response.data);
             })
             .catch(error => {
                 console.error(error);
@@ -54,7 +54,7 @@ const Event = () => {
         axios
             .get(`http://localhost:8000/api/event/ticket/${id}`)
             .then(function (response){
-                console.log(response.data);
+                //console.log(response.data);
                 setTicketData(Array.isArray(response.data) ? response.data : [response.data]);
                 setQuantity(new Array(response.data.length).fill(0)); // Initialize quantity with zeros
                 setIsLoading(false); // Set loading to false after data is loaded
@@ -150,9 +150,9 @@ const Event = () => {
                             </div>
                             {ticketData.map((ticket, index) => (
                                 <div key={index} className={css.ticketListContainer}>
-                                    <p className={css.p}>Ticket: {ticket.ticket}</p>
-                                    <p className={css.p}>Price: {ticket.ticket_price} EUR</p>
-                                    <p className={css.p}>Available: {ticket.quantity}</p>
+                                    <div className={css.contents}><p className={css.p}> {ticket.ticket}</p></div>
+                                    <div className={css.contents}><p className={css.p}> {ticket.ticket_price} EUR</p></div>
+                                    <div className={css.contents}><p className={css.p}> {ticket.quantity}</p></div>
                                     <div className={css.quantityDiv}>
                                         <button className={css.quantityButton} onClick={() => decreaseQuantity(index)}
                                                 disabled={quantity[index] === 0}>-

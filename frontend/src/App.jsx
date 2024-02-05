@@ -9,6 +9,7 @@ import Event from './components/Events';
 import './style/App.css'
 import Logout from "./components/Logout.jsx";
 import AdminPanel from "./components/AdminPanel.jsx";
+import Checkout from "./components/Checkout.jsx";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/forgotpassword' element={<ForgotPass />} />,
           <Route path='/register' element={<Register />} />,
           <Route path='/login' element={<Login />} />,
+          <Route path='/checkout' element={<Checkout />} />,
         <Route path='*' element={<Error404 />} />
       </Routes>
     </BrowserRouter>

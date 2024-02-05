@@ -39,6 +39,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: auto;
 }
 
 .bottomContainer {
@@ -55,9 +56,11 @@
     background-color: white;
     border-radius: 10px;
     width: 60%;
-    height:40vh;
+    min-height:40vh;
+    height: auto;
     margin-top: 20px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    padding: 10px;
 }
 
 .listContainer{
@@ -143,6 +146,14 @@
 .checkoutButton:hover {
     background: rgb(15, 128, 5);
     box-shadow: 0px 0px 6px 1px rgba(0, 0, 0, 0.85);
+}
+
+.contents{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    height: 100%;
 }
 
 

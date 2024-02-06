@@ -13,6 +13,7 @@ const Event = () => {
     const [successMessage, setSuccessMessage] = useState('');
     const [quantityError, setQuantityError] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState([]);
 
@@ -67,41 +68,25 @@ const Event = () => {
 
 
     const handleCheckout = () => {
-        ticketData.forEach((ticket, index) => {
-            // Calculate the new quantity
-            const newQuantity = ticket.quantity - quantity[index];
-            if(quantity[index] == 0){
-                setQuantityError('You can not buy 0 tickets!');
-                setSuccessMessage('');
-            }else {
-                setQuantityError('');
-                // Send a PUT or PATCH request to update the quantity
-                axios.put(`http://localhost:8000/api/event/${ticket.event_id}/ticket/${ticket.id}`, {
-                    quantity: newQuantity,
-                }, {
-                    headers: {Authorization: `Bearer ${Cookies.get('token')}`}
-                })
-                    .then(response => {
-                        console.log('Ticket quantity updated successfully');
-                        setSuccessMessage('Payment Successful!');
-                        // Update the ticketData state with the new quantity
-                        setTicketData(prevState => prevState.map((ticket, i) => {
-                            if (i === index) {
-                                return {
-                                    ...ticket,
-                                    quantity: newQuantity,
-                                };
-                            } else {
-                                return ticket;
-                            }
-                        }));
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-            }
-        });
+        // Filter out tickets with zero quantity and include the quantity
+        const ticketsToBuy = ticketData
+            .map((ticket, index) => ({ ...ticket, quantity: quantity[index] }))
+            .filter(ticket => ticket.quantity > 0);
+
+        if (ticketsToBuy.length === 0) {
+            // No tickets selected, show error message
+            setQuantityError('You can not buy 0 tickets!');
+            setSuccessMessage('');
+        } else {
+            // Tickets selected, clear error message and show success message
+            setQuantityError('');
+            setSuccessMessage('Redirecting to checkout...');
+
+            navigate('/checkout', { state: { ticketsToBuy } });
+        }
     };
+
+
 
 
     if (isLoading) {

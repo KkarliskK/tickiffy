@@ -112,11 +112,21 @@ class EventController extends Controller
         $events = Event::inRandomOrder()->limit(5)->get();
         return response()->json($events);
     }
-    public function getRandomEvent(Request $request, Event $event, $id)
+
+    public function getAll($id = null)
     {
-        $events = Event::where('categories_id', $id)->inRandomOrder()->limit(5)->get();
+        if ($id) {
+            $events = Event::where('categories_id', $id)->orderBy('date', 'asc')->get();
+        } else {
+            $events = Event::orderBy('date', 'asc')->get();
+        }
         return response()->json($events);
     }
+
+
+
+
+
 
 
 }

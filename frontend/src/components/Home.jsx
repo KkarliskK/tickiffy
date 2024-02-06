@@ -11,24 +11,25 @@ const Home = () => {
         axios
             .get('http://localhost:8000/api/home/random')
             .then(function (response){
-                //console.log("Events fetched: ", response.data);
                 const events = response.data;
-                const promises = events.map(event =>
-                    axios.get(`http://localhost:8000/api/event/ticket/${event.id}`)
-                        .then(response => {
-                            //console.log(`Ticket price for event id ${event.id}: `, response.data[0].ticket_price);
-                            event.ticket_price = response.data[0].ticket_price;
-                            return event;
-                        })
-                        .catch(error => {
-                            console.error(`Error fetching ticket for event id ${event.id}: `, error);
-                            event.ticket_price = 'Error';
-                            return event;
-                        })
+                const promises = events.map((event, index) =>
+                    new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            axios.get(`http://localhost:8000/api/event/ticket/${event.id}`)
+                                .then(response => {
+                                    event.ticket_price = response.data[0].ticket_price;
+                                    resolve(event);
+                                })
+                                .catch(error => {
+                                    console.error(`Error fetching ticket for event id ${event.id}: `, error);
+                                    event.ticket_price = 'Error';
+                                    resolve(event);
+                                });
+                        }, index * 1000); // delay of 1 second between each request
+                    })
                 );
                 Promise.all(promises)
                     .then(updatedEvents => {
-                        //console.log("Updated events with ticket prices: ", updatedEvents);
                         setRandomEvents(updatedEvents);
                     });
             })
@@ -36,13 +37,6 @@ const Home = () => {
                 console.error("Error fetching events: ", error);
             });
     }, []);
-
-
-
-
-
-
-
 
     return(
         <>
@@ -82,10 +76,7 @@ const Home = () => {
                         </div>
                     </Link>
                 ))}
-
             </div>
-
-
         </>
     );
 };

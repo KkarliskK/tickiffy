@@ -23,10 +23,12 @@ class CheckoutController extends Controller
 
 
         function calculateOrderAmount(array $items): int {
-            // Replace this constant with a calculation of the order's amount
-            // Calculate the order total on the server to prevent
-            // people from directly manipulating the amount on the client
-            return 2100;
+            $totalPrice = 0;
+            foreach ($items as $item) {
+                $totalPrice += $item->ticket_price * $item->quantity;
+            }
+            // Stripe expects amounts in cents, so multiply by 100 and round
+            return round($totalPrice * 100);
         }
 
         header('Content-Type: application/json');

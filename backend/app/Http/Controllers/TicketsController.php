@@ -76,6 +76,17 @@ class TicketsController extends Controller
         ], 200);
     }
 
+    public function getTicketPrices(Request $request)
+    {
+        $ids = explode(',', $request->query('ids'));
+
+        // Fetch the ticket prices from your database. This is just a placeholder
+        // and you'll need to replace it with your actual query.
+        $ticketPrices = Tickets::whereIn('event_id', $ids)->pluck('ticket_price', 'event_id');
+
+        return response()->json($ticketPrices);
+    }
+
 
 
 }

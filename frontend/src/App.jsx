@@ -11,6 +11,7 @@ import Logout from "./components/Logout.jsx";
 import AdminPanel from "./components/AdminPanel.jsx";
 import Checkout from "./components/Checkout.jsx";
 import AllEvents from "./components/AllEvents.jsx";
+import Success from "./components/Success.jsx";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/adminpanel' element={<AdminPanel />} />
           <Route path='/event/:id' element={<Event />} />
           <Route path='/events' element={<AllEvents />} />
+          <Route path='/success' element={<Success />} />
           <Route path='/events/:id' element={<AllEvents />} />
           <Route path='/forgotpassword' element={<ForgotPass />} />,
           <Route path='/register' element={<Register />} />,

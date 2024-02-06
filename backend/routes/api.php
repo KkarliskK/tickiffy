@@ -34,10 +34,12 @@ Route::get('/event/showbycat/{id}', [EventController::class, 'showByCategory']);
 Route::delete('/event/delete/{id}', [EventController::class, 'delete']);
 Route::get('/event/update/{id}', [EventController::class, 'getUpdate']);
 Route::get('/home/random', [EventController::class, 'getRandom']);
-Route::get('/home/random/{id}', [EventController::class, 'getRandomEvent']);
+Route::get('/home/allevents/{id?}', [EventController::class, 'getAll']);
 Route::get('/event/single/{id}', [EventController::class, 'select']);
 Route::post('/event/{eventId}/ticket/create', [TicketsController::class, 'create']);
 Route::get('/event/ticket/{id}', [TicketsController::class, 'select']);
 Route::put('/event/{eventId}/ticket/{id}', [TicketsController::class, 'change']);
 Route::post('/home/create', [CheckoutController::class, 'create']);
+Route::get('/event/tickets', [TicketsController::class, 'getTicketPrices']);
+
 

@@ -1,88 +1,111 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import css from '../style/Events.module.css';
-import {Link, useParams} from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from "axios";
+import {MagnifyingGlass} from "@phosphor-icons/react";
 
 const AllEvents = () => {
-
-    const {id} = useParams();
-    const [randomEvents, setRandomEvents] = useState([]);
+    const [allEvents, setAllEvents] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [sortOrder, setSortOrder] = useState('asc');
+    const [filterText, setFilterText] = useState('');
+    const { id } = useParams();
 
     useEffect(() => {
+        const url = id ? `http://localhost:8000/api/home/allevents/${id}` : 'http://localhost:8000/api/home/allevents';
         axios
-            .get(`http://localhost:8000/api/home/random/${id}`)
-            .then(function (response){
-                //console.log("Events fetched: ", response.data);
+            .get(url)
+            .then(function (response) {
                 const events = response.data;
-                const promises = events.map(event =>
-                    axios.get(`http://localhost:8000/api/event/ticket/${event.id}`)
-                        .then(response => {
-                            //console.log(`Ticket price for event id ${event.id}: `, response.data[0].ticket_price);
-                            event.ticket_price = response.data[0].ticket_price;
+                axios
+                    .get(`http://localhost:8000/api/event/tickets?ids=${events.map(event => event.id).join(',')}`)
+                    .then(response => {
+                        const ticketPrices = response.data;
+                        let updatedEvents = events.map(event => {
+                            event.ticket_price = ticketPrices[event.id];
                             return event;
-                        })
-                        .catch(error => {
-                            console.error(`Error fetching ticket for event id ${event.id}: `, error);
-                            event.ticket_price = 'Error';
-                            return event;
-                        })
-                );
-                Promise.all(promises)
-                    .then(updatedEvents => {
-                        //console.log("Updated events with ticket prices: ", updatedEvents);
-                        setRandomEvents(updatedEvents);
+                        });
+
+                        // sort events
+                        updatedEvents.sort((a, b) => {
+                            if (sortOrder === 'asc') {
+                                return a.date.localeCompare(b.date);
+                            } else {
+                                return b.date.localeCompare(a.date);
+                            }
+                        });
+
+                        // filter events
+                        let filteredEvents = updatedEvents.filter(event =>
+                            event.event.toLowerCase().includes(filterText.toLowerCase()) &&
+                            (!selectedCategory || event.categories_id.toString() === selectedCategory)
+                        );
+
+                        setAllEvents(filteredEvents);
+                    })
+                    .catch(error => {
+                        console.error("Error fetching ticket prices: ", error);
+                    });
+
+                // Fetch categories
+                axios
+                    .get('http://localhost:8000/api/categories')
+                    .then(response => {
+                        setCategories(response.data);
+                    })
+                    .catch(error => {
+                        console.error("Error fetching categories: ", error);
                     });
             })
-            .catch(function (error){
+            .catch(function (error) {
                 console.error("Error fetching events: ", error);
             });
-    }, []);
+    }, [sortOrder, filterText, selectedCategory]);
 
-    return(
+    return (
         <>
-            <h1 className={css.h1}>Concerts:</h1>
-            <div className={css.eventsContainer}>  {/**This is for random concert events***/}
-                {randomEvents.map((event, index) => (
-                    <Link key={index} className={css.singleEventLink} to={`/event/${event.id}`}>
-                        <div className={css.singleEvent}>
-                            <img
-                                className={css.singleEventImage}
-                                src={event.img_url}
-                            />
-                            <h3 className={css.singleEventTitle}>{event.event}</h3>
-                            <div className={css.info}>
-                                <p className={css.price}>Ticket
-                                    Price: {event.ticket_price ? event.ticket_price : 'Loading...'} EUR</p>
-
-                                <p className={css.date}>Date: {event.date}</p>
-                            </div>
-                        </div>
-                    </Link>
-                ))}
+            <h1 className={css.h1}>Upcoming Events:</h1>
+            <div className={css.filterBox}>
+                <div className={css.categoryBox}>
+                    <div className={css.labelBox}>
+                        <label className={css.label}>Sort by date: </label>
+                    </div>
+                    <select className={css.selectFilter} value={sortOrder} onChange={e => setSortOrder(e.target.value)}>
+                        <option value='asc'>Ascending</option>
+                        <option value='desc'>Descending</option>
+                    </select>
+                </div>
+                <div className={css.categoryBox}>
+                    <div className={css.labelBox}>
+                        <label className={css.label}>Filter by category: </label>
+                    </div>
+                    <select className={css.selectFilter} value={selectedCategory}
+                            onChange={e => setSelectedCategory(e.target.value)}>
+                        <option value=''>All</option>
+                        {categories.map((category, index) => (
+                            <option key={index} value={category.id}>{category.category}</option>
+                        ))}
+                    </select>
+                </div>
             </div>
-            <h1 className={css.h1}>Sport events:</h1>
-            <div className={css.eventsContainer}>{/**This is for random Sport events***/}
-                {randomEvents.map((event, index) => (
-                    <Link key={index} className={css.singleEventLink} to={`/event/${event.id}`}>
-                        <div className={css.singleEvent}>
-                            <img
-                                className={css.singleEventImage}
-                                src={event.img_url}
-                            />
-                            <h3 className={css.singleEventTitle}>{event.event}</h3>
-                            <div className={css.info}>
-                                <p className={css.price}>Ticket
-                                    Price: {event.ticket_price ? event.ticket_price : 'Loading...'} EUR</p>
-
-                                <p className={css.date}>Date: {event.date}</p>
-                            </div>
-                        </div>
-                    </Link>
-                ))}
+            <div className={css.searchBox}>
+                <div className={css.searchLabelBox}>
+                    <label className={css.label}>Search by title: </label>
+                </div>
+                <div className={css.searchInput}>
+                    <MagnifyingGlass className={css.icon} size={32}/>
+                    <input
+                        placeholder='e. g. Positivus Festival'
+                        className={css.searchInputReal}
+                        type='text'
+                        value={filterText}
+                        onChange={e => setFilterText(e.target.value)}
+                    />
+                </div>
             </div>
-            <h1 className={css.h1}>Festivals:</h1>
-            <div className={css.eventsContainer}>{/**This is for random Festival events***/}
-                {randomEvents.map((event, index) => (
+            <div className={css.eventsContainer}>
+                {allEvents.map((event, index) => (
                     <Link key={index} className={css.singleEventLink} to={`/event/${event.id}`}>
                         <div className={css.singleEvent}>
                             <img
@@ -93,7 +116,6 @@ const AllEvents = () => {
                             <div className={css.info}>
                                 <p className={css.price}>Ticket
                                     Price: {event.ticket_price ? event.ticket_price : 'Loading...'} EUR</p>
-
                                 <p className={css.date}>Date: {event.date}</p>
                             </div>
                         </div>

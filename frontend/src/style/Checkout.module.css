@@ -100,6 +100,14 @@ button:disabled {
     animation: loading 2s infinite ease;
 }
 
+p{
+    color: black;
+}
+
+h2{
+    color: black;
+}
+
 @keyframes loading {
     0% {
         -webkit-transform: rotate(0deg);

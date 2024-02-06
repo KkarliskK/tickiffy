@@ -54,6 +54,7 @@
 }
 
 .singleEventTitle {
+    align-items: center;
     position: relative;
     z-index: 1;
     transition: opacity 0.3s ease;
@@ -61,11 +62,11 @@
     font-weight: bold;
     color: white;
     background: rgba(0, 0, 0, 0.5);
-    display: inline;
+    display: flex;
     padding: 0.2em;
     margin: 0;
     width: 100%;
-    height: 10vh;
+    height: 15vh;
     border-radius: 6px;
 }
 
@@ -89,6 +90,87 @@
         font-size: 22px;
     }
 }
+
+.filterBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+
+}
+
+.searchBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    margin: 5px;
+}
+
+.searchInput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3px;
+    margin: 10px;
+    width: 20%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.10);
+    box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.45);
+    border-radius: 4px;
+}
+
+.searchInputReal{
+    background: none;
+    border: none;
+    width: 100%;
+    height: 4vh;
+    font-size: 18px;
+}
+
+.selectFilter{
+    text-align: center;
+    padding: 3px;
+    margin: 10px;
+    width: 90%;
+    height: 5vh;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.10);
+    box-shadow: inset 0px 0px 4px 0px rgba(0,0,0,0.45);
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+.categoryBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+
+.labelBox{
+    display: flex;
+    width: 90%;
+}
+
+.searchLabelBox{
+    display: flex;
+    width: 20%;
+}
+
+.icon{
+    color: black;
+    margin: 5px;
+}
+
+.label{
+    color: black;
+}
+
 
 .singleEvent:hover .info {
     opacity: 1;

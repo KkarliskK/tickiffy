@@ -74,7 +74,7 @@ return new class extends Migration
             [
                 'event' => 'Dinamo Riga hockey game',
                 'description' => 'KHL Dinamo Riga vs Some random team will play for the final win.',
-                'categories_id' => '4',
+                'categories_id' => '1',
                 'date' => '2024-11-18',
                 'time' => '20:00:00',
                 'location' => 'Riga, Arena Riga',
